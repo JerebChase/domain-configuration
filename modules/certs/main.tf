@@ -27,7 +27,7 @@ resource "cloudflare_dns_record" "dev_domain_validation" {
 
   zone_id = var.zone_id
   name    = each.value.name
-  value   = each.value.value
+  content = each.value.value
   type    = each.value.type
   ttl     = 300
 }
