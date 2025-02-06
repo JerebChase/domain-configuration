@@ -16,11 +16,13 @@ provider "aws" {
 
 provider "cloudflare" { }
 
-# module "acm" {
-#   source = "./modules/acm"
-# }
-
-module "cloudflare" {
-  source    = "./modules/cloudflare"
+module "caa" {
+  source  = "./modules/caa"
   zone_id = var.zone_id
+}
+
+module "acm" {
+  source          = "./modules/certs"
+  dev_cert_domain = module.caa.dev_cert_domain
+  zone_id         = var.zone_id
 }
