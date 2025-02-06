@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    cloudflare = {
+      source = "cloudflare/cloudflare"
+    }
+  }
+}
+
 # resource "aws_acm_certificate" "prod_cert" {
 #   domain_name       = "example.com"
 #   validation_method = "DNS"
