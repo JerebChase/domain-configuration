@@ -7,7 +7,7 @@ terraform {
 }
 
 data "cloudflare_zone" "main_zone" {
-  filter = {
+  filter {
     name = var.zone_name
   }
 }
