@@ -7,14 +7,12 @@ terraform {
 }
 
 data "cloudflare_zone" "main_zone" {
-  filter {
-    name = var.zone_name
-  }
+  zone_id = var.zone_id
 }
 
 resource "cloudflare_dns_record" "caa_root" {
   zone_id = data.cloudflare_zone.main_zone.zone_id
-  name    = var.zone_name
+  name    = data.cloudflare_zone.main_zone.name
   type    = "CAA"
   ttl     = 300
   data    = {
@@ -26,7 +24,7 @@ resource "cloudflare_dns_record" "caa_root" {
 
 resource "cloudflare_dns_record" "caa_subdomain" {
   zone_id = data.cloudflare_zone.main_zone.zone_id
-  name    = "*.${var.zone_name}"
+  name    = "*.${data.cloudflare_zone.main_zone.name}"
   type    = "CAA"
   ttl     = 300
   data    = {
@@ -38,7 +36,7 @@ resource "cloudflare_dns_record" "caa_subdomain" {
 
 resource "cloudflare_dns_record" "caa_root_wildcard" {
   zone_id = data.cloudflare_zone.main_zone.zone_id
-  name    = var.zone_name
+  name    = data.cloudflare_zone.main_zone.name
   type    = "CAA"
   ttl     = 300
   data    = {
@@ -50,7 +48,7 @@ resource "cloudflare_dns_record" "caa_root_wildcard" {
 
 resource "cloudflare_dns_record" "caa_subdomain_wildcard" {
   zone_id = data.cloudflare_zone.main_zone.zone_id
-  name    = "*.${var.zone_name}"
+  name    = "*.${data.cloudflare_zone.main_zone.name}"
   type    = "CAA"
   ttl     = 300
   data    = {

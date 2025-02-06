@@ -22,5 +22,5 @@ provider "cloudflare" { }
 
 module "cloudflare" {
   source    = "./modules/cloudflare"
-  zone_name = var.zone_name
+  zone_id = var.zone_id
 }
