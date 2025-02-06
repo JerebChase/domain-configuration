@@ -10,36 +10,52 @@ data "cloudflare_zone" "main_zone" {
   name = var.zone_name
 }
 
-resource "cloudflare_record" "caa_root" {
+resource "cloudflare_dns_record" "caa_root" {
   zone_id = data.cloudflare_zone.main_zone.zone_id
   name    = var.zone_name
   type    = "CAA"
   ttl     = 300
-  value   = "0 issue \"amazonaws.com\""
+  data {
+    flag  = 0
+    tag   = "issue"
+    value = "amazonaws.com"
+  }
 }
 
-resource "cloudflare_record" "caa_subdomain" {
+resource "cloudflare_dns_record" "caa_subdomain" {
   zone_id = data.cloudflare_zone.main_zone.zone_id
   name    = "*.${var.zone_name}"
   type    = "CAA"
   ttl     = 300
-  value   = "0 issue \"amazonaws.com\""
+  data {
+    flag  = 0
+    tag   = "issue"
+    value = "amazonaws.com"
+  }
 }
 
-resource "cloudflare_record" "caa_root_wildcard" {
+resource "cloudflare_dns_record" "caa_root_wildcard" {
   zone_id = data.cloudflare_zone.main_zone.zone_id
   name    = var.zone_name
   type    = "CAA"
   ttl     = 300
-  value   = "0 issuewild \"amazonaws.com\""
+  data {
+    flag  = 0
+    tag   = "issuewild"
+    value = "amazonaws.com"
+  }
 }
 
-resource "cloudflare_record" "caa_subdomain_wildcard" {
+resource "cloudflare_dns_record" "caa_subdomain_wildcard" {
   zone_id = data.cloudflare_zone.main_zone.zone_id
   name    = "*.${var.zone_name}"
   type    = "CAA"
   ttl     = 300
-  value   = "0 issuewild \"amazonaws.com\""
+  data {
+    flag  = 0
+    tag   = "issuewild"
+    value = "amazonaws.com"
+  }
 }
 
 # resource "cloudflare_record" "certificate_record" {
