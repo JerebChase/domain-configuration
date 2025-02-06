@@ -17,7 +17,7 @@ resource "cloudflare_dns_record" "caa_root" {
   name    = var.zone_name
   type    = "CAA"
   ttl     = 300
-  data {
+  data    = {
     flag  = 0
     tag   = "issue"
     value = "amazonaws.com"
@@ -29,7 +29,7 @@ resource "cloudflare_dns_record" "caa_subdomain" {
   name    = "*.${var.zone_name}"
   type    = "CAA"
   ttl     = 300
-  data {
+  data    = {
     flag  = 0
     tag   = "issue"
     value = "amazonaws.com"
@@ -41,7 +41,7 @@ resource "cloudflare_dns_record" "caa_root_wildcard" {
   name    = var.zone_name
   type    = "CAA"
   ttl     = 300
-  data {
+  data    = {
     flag  = 0
     tag   = "issuewild"
     value = "amazonaws.com"
@@ -53,7 +53,7 @@ resource "cloudflare_dns_record" "caa_subdomain_wildcard" {
   name    = "*.${var.zone_name}"
   type    = "CAA"
   ttl     = 300
-  data {
+  data    = {
     flag  = 0
     tag   = "issuewild"
     value = "amazonaws.com"
