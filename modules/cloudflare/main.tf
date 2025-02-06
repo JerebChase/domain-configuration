@@ -7,7 +7,9 @@ terraform {
 }
 
 data "cloudflare_zone" "main_zone" {
-  name = var.zone_name
+  filter = {
+    name = var.zone_name
+  }
 }
 
 resource "cloudflare_dns_record" "caa_root" {
