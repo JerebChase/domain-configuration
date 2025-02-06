@@ -2,6 +2,12 @@ terraform {
   cloud {
     organization = "jeremy-chase-brown"
   }
+  required_providers {
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "4.40.0"
+    }
+  }
 }
 
 provider "aws" {
