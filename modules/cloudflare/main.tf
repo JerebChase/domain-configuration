@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    cloudflare = {
+      source = "cloudflare/cloudflare"
+    }
+  }
+}
+
 data "cloudflare_zone" "main_zone" {
   name = var.zone_name
 }
