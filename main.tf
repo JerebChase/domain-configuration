@@ -24,5 +24,6 @@ module "caa" {
 module "acm" {
   source          = "./modules/certs"
   dev_cert_domain = module.caa.dev_cert_domain
+  prod_cert_domain = module.caa.prod_cert_domain
   zone_id         = var.zone_id
 }
