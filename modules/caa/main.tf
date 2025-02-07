@@ -22,17 +22,17 @@ data "cloudflare_zone" "main_zone" {
 #   }
 # }
 
-# resource "cloudflare_dns_record" "caa_subdomain" {
-#   zone_id = var.zone_id
-#   name    = "*.dev.${data.cloudflare_zone.main_zone.name}"
-#   type    = "CAA"
-#   ttl     = 300
-#   data    = {
-#     flags = "0"
-#     tag   = "issue"
-#     value = "amazonaws.com"
-#   }
-# }
+resource "cloudflare_dns_record" "caa_subdomain" {
+  zone_id = var.zone_id
+  name    = "dev.${data.cloudflare_zone.main_zone.name}"
+  type    = "CAA"
+  ttl     = 300
+  data    = {
+    flags = "0"
+    tag   = "issue"
+    value = "amazonaws.com"
+  }
+}
 
 # resource "cloudflare_dns_record" "caa_root_wildcard" {
 #   zone_id = data.cloudflare_zone.main_zone.zone_id
@@ -48,7 +48,7 @@ data "cloudflare_zone" "main_zone" {
 
 resource "cloudflare_dns_record" "caa_subdomain_wildcard" {
   zone_id = var.zone_id
-  name    = "*.dev.${data.cloudflare_zone.main_zone.name}"
+  name    = "dev.${data.cloudflare_zone.main_zone.name}"
   type    = "CAA"
   ttl     = 300
   data    = {
